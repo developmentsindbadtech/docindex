@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (optional - include if you want to keep repo size small)
+*.md
+!README.md
+
+# Tests
+test*.py
+tests/
+pytest_cache/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db
+

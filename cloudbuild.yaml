@@ -1,0 +1,38 @@
+# Google Cloud Build configuration for Cloud Run deployment
+# This file automates the build and deployment process
+
+steps:
+  # Step 1: Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/sharepoint-doc-indexer:$COMMIT_SHA', '.']
+  
+  # Step 2: Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/sharepoint-doc-indexer:$COMMIT_SHA']
+  
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'sharepoint-doc-indexer'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/sharepoint-doc-indexer:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'  # Change to your preferred region
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'  # The app has its own SSO authentication
+      - '--set-env-vars'
+      - 'HOST=0.0.0.0,PORT=8080'
+      # Add other environment variables via Secret Manager or here
+
+# Images to store in Container Registry
+images:
+  - 'gcr.io/$PROJECT_ID/sharepoint-doc-indexer:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/sharepoint-doc-indexer:latest'
+
+# Timeout for the entire build (30 minutes)
+timeout: 1800s
+

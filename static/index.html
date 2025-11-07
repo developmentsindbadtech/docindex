@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sindbad.Tech SharePoint Doc Indexer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>📁 Sindbad.Tech SharePoint Doc Indexer</h1>
+                    <p class="subtitle">Index and search all your SharePoint documents</p>
+                </div>
+                <div id="userInfo" style="text-align: right; font-size: 14px; color: #666666;">
+                    <div id="userName" style="font-weight: 600;"></div>
+                    <a href="/auth/logout" style="color: #ff6600; text-decoration: none; font-size: 12px;">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <button id="discoverBtn" class="btn btn-secondary">
+                <span class="btn-icon">🔍</span>
+                Discover Sites
+            </button>
+            <button id="refreshBtn" class="btn btn-primary" style="display: none;">
+                <span class="btn-icon">🔄</span>
+                Index Selected Sites
+            </button>
+            <button id="stopResetBtn" class="btn btn-danger">
+                <span class="btn-icon">⏹️</span>
+                Stop & Reset All
+            </button>
+            <div id="statusBadge" class="status-badge"></div>
+        </div>
+
+        <div id="siteSelectionContainer" class="site-selection-container hidden">
+            <h2>Select Sites to Index</h2>
+            <div class="selection-controls">
+                <button id="selectAllBtn" class="btn btn-small">Select All</button>
+                <button id="deselectAllBtn" class="btn btn-small">Deselect All</button>
+                <span id="selectedCount" class="selected-count">0 sites selected</span>
+            </div>
+            <div id="siteSelectionList" class="site-selection-list"></div>
+        </div>
+
+        <div id="progressContainer" class="progress-container hidden">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressText">Initializing...</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Sites</div>
+                <div id="statSites" class="stat-value">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Files</div>
+                <div id="statFiles" class="stat-value">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">File Types</div>
+                <div id="statFileTypes" class="stat-value">-</div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search files and email attachments... (English & Arabic supported)" 
+                    class="search-input"
+                    dir="auto"
+                >
+                <button id="searchBtn" class="btn btn-search">🔍 Search</button>
+            </div>
+            <div id="searchResults" class="search-results hidden">
+                <div id="searchResultsHeader" style="display: none; margin-bottom: 15px;">
+                    <button id="clearSearchBtn" class="btn btn-secondary btn-small">
+                        Clear Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0;">All Files</h2>
+                <button id="clearFilesBtn" class="btn btn-secondary" style="display: none;">
+                    Clear All
+                </button>
+            </div>
+            <div id="filesList" class="files-table-container">
+                <div class="loading">Loading files...</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Indexed Sites</h2>
+            <div id="sitesList" class="sites-list">
+                <div class="loading">Loading sites...</div>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+
+    <script src="/static/js/app.js?v=2"></script>
+</body>
+</html>
+
