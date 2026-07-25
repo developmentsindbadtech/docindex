@@ -1,4 +1,4 @@
-# SharePoint Document Indexer
+# SharePoint Document Indexer.
 
 A lightweight, scalable web application that queries SharePoint via Microsoft Graph API to index and collate all files and folders. The application features async background processing, efficient caching, pagination, and is designed to integrate Meta Llama 3/3.1 for intelligent search capabilities.
 
@@ -236,5 +236,6 @@ This project is provided as-is for internal use.
 
 For issues or questions, please check the troubleshooting section or review the application logs.
 
-#   d o c i n d e x  
+#   d o c i n d e x 
+ 
  
